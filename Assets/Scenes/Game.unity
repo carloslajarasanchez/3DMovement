@@ -347,6 +347,8 @@ GameObject:
   - component: {fileID: 1096152251}
   - component: {fileID: 1096152250}
   - component: {fileID: 1096152249}
+  - component: {fileID: 1096152254}
+  - component: {fileID: 1096152253}
   - component: {fileID: 1096152248}
   m_Layer: 0
   m_Name: Player
@@ -460,6 +462,34 @@ Transform:
   - {fileID: 386206466}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096152253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096152247}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c944fdf1a0d757c4787b808186179f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3
+  _rotateSpeed: 10
+--- !u!114 &1096152254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096152247}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7401327115a854fb7463415a0a0a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _mouseSensibility: 10
 --- !u!1 &1130265540
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offset: 10
   _mouseSensibility: 5
+  _limitPitchUp: 60
+  _limitPitchDown: 15
 --- !u!1 &1909474826
 GameObject:
   m_ObjectHideFlags: 0

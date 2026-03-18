@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         CameraRotation();
         UpdateCameraPosition();

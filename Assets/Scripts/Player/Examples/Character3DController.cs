@@ -38,9 +38,8 @@ public class Character3DController : MonoBehaviour
 
     private void HandleGravity()
     {
-        if (_characterController.isGrounded)
+        if (_isGrounded)
         {
-            // Pequeña velocidad negativa para mantener al personaje "pegado" al suelo
             if (_verticalVelocity < 0f)
                 _verticalVelocity = -2f;
         }

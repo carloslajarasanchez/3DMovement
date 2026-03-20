@@ -1,15 +1,15 @@
-public enum States
-{
-    Small,
-    Big,
-    Fire
-}
+using System;
+using System.Diagnostics;
+
 public class Player
 {
     public int Coins { get; private set; }
-    public int Lives { get; private set; } = 3;
+    public float Lives { get; private set; } = 100f;
     public int TimeElapsed { get; private set; } = 400;
     public int Points { get; private set; }
+    public int Damage { get; private set; } = 5;
+    public bool IsInvincible { get; private set; } = false;
+   
 
     public Diffuclt CurrentDificult { get; private set; } = Diffuclt.Easy;
 
@@ -35,7 +35,7 @@ public class Player
     /// Resta vidas al player
     /// </summary>
     /// <param name="amount"></param>
-    public void RestLives(int amount)
+    public void TakeDamage(float amount)
     {
         Lives -= amount;
 
@@ -43,7 +43,7 @@ public class Player
         {
             Main.CustomEvents.OnGameOver?.Invoke();
         }
-
+        Main.CustomEvents.OnPlayerHit?.Invoke(amount);
         Main.CustomEvents.OnLivesChanged?.Invoke();
         Main.CustomEvents.OnPlayerDeath.Invoke();
     }
@@ -98,5 +98,12 @@ public class Player
         TimeElapsed = 400;
         Points = 0;
         CurrentDificult = Diffuclt.Easy;
+    }
+    public void SetInvincible(bool value) => IsInvincible = value;
+
+    public void LevelUp()
+    {
+        Lives += 10;
+        Damage += 1;
     }
 }

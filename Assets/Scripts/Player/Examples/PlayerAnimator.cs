@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -15,7 +12,10 @@ public class PlayerAnimator : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _character3DController = GetComponent<Character3DController>();
         _animator = GetComponent<Animator>();
-        //Main.CustomEvents.OnJumped?.AddListener(HandleJumpAnimation);
+
+        Main.CustomEvents.OnAttackCombo?.AddListener(HandleAttackAnimation);
+        Main.CustomEvents.OnComboReset?.AddListener(HandleComboResetAnimation);
+        Main.CustomEvents.OnPlayerHit?.AddListener(HandleHitAnimation);
     }
 
     // Update is called once per frame
@@ -23,7 +23,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         HandleWalkAnimation();
         HandleJumpAnimation();
-        // Debug.Log($"Velocidad: {_characterController.velocity}");
     }
 
     private void HandleWalkAnimation()
@@ -41,8 +40,28 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetBool("IsGrounded", isGrounded);
     }
 
+    private void HandleAttackAnimation(int comboCount)
+    {
+        _animator.SetInteger("ComboCount", comboCount);
+        _animator.SetBool("IsAttacking", true);
+    }
+
+    private void HandleComboResetAnimation()
+    {
+        _animator.SetBool("IsAttacking", false);
+        _animator.SetInteger("ComboCount", 0);
+    }
+
+    private void HandleHitAnimation(float damage)
+    {
+        _animator.SetTrigger("Hit");
+    }
+
     private void OnDestroy()
     {
-        //Main.CustomEvents.OnJumped?.RemoveListener(HandleJumpAnimation);
+        Main.CustomEvents.OnAttackCombo?.RemoveListener(HandleAttackAnimation);
+        Main.CustomEvents.OnComboReset?.RemoveListener(HandleComboResetAnimation);
+        Main.CustomEvents.OnPlayerHit?.RemoveListener(HandleHitAnimation);
     }
 }
+

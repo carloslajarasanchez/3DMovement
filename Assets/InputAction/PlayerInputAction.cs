@@ -250,7 +250,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -261,7 +261,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -272,7 +272,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -283,10 +283,21 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf03e362-1e40-4a85-9cd1-6b57d097535a"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -294,7 +305,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d92b4a9-c851-4583-8db6-aa4d7c5da7ee"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -305,7 +327,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81a21863-152e-4677-8912-7a3ae809e31e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -320,6 +353,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -661,6 +705,19 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         {
             if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
             return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
     /// <summary>

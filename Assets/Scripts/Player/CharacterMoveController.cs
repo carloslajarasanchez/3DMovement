@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 public class CharacterMoveController : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _rotationSpeed = 5f;
+    [SerializeField] private float _jumpHeight = 5f;
 
     private Vector3 playerVelocity;
     private float gravityValue = -9.81f;
@@ -19,6 +21,7 @@ public class CharacterMoveController : MonoBehaviour
     void Start()
     {
         InputManager.SwitchControlMap(InputManager.ControlMap.Player);
+        InputManager.Actions.Player.Jump.performed += Jump;
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class CharacterMoveController : MonoBehaviour
 
         if (groundedPlayer)
         {
-            // Slight downward velocity to keep grounded stable
+           
             if (playerVelocity.y < -2f)
                 playerVelocity.y = -2f;
         }
@@ -39,12 +42,14 @@ public class CharacterMoveController : MonoBehaviour
         Vector2 inputPlayer = InputManager.Actions.Player.Move.ReadValue<Vector2>();
 
         Vector3 move = Vector3.zero;
+
+        
         if (inputPlayer.magnitude > .1f)
         {
 
             // Direccion del movimiento
             var cameraForward = Camera.main.transform.forward;
-            var cameraRight = Camera.main.transform.right;// ver como añado el cameraRight
+            var cameraRight = Camera.main.transform.right;
             var playerDirection = new Vector3(cameraForward.x, 0, cameraForward.z);
 
             playerDirection = Vector3.ClampMagnitude(playerDirection, 1f);
@@ -58,5 +63,18 @@ public class CharacterMoveController : MonoBehaviour
 
         move = move * _moveSpeed + Vector3.up * playerVelocity.y;
         _characterController.Move(move * Time.deltaTime);
+    }
+
+    private void Jump(InputAction.CallbackContext callbackContext)
+    {
+        if (groundedPlayer)
+        {
+            playerVelocity.y = Mathf.Sqrt(_jumpHeight * -2f * gravityValue);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Actions.Player.Jump.performed -= Jump;
     }
 }

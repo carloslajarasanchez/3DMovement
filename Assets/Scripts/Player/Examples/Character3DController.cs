@@ -14,7 +14,6 @@ public class Character3DController : MonoBehaviour
     private CharacterController _characterController;
     private Transform _cameraTransform;
 
-
     public bool IsGrounded { get { return _isGrounded; } private set { _isGrounded = value; } }
 
     private void Awake()
